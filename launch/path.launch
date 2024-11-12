@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<launch>
+    <include file="$(find eufs_gazebo)/launch/small_track.launch"/> 
+    <include file="$(find ground_removal)/launch/main.launch"/>
+    <include file="$(find robot_control)/launch/rqt_robot_control.launch"/>
+    <node pkg="tf" type="static_transform_publisher" name="map_to_odom" args="0 0 0 0 0 0 map odom 30" />
+    <node pkg="tf" type="static_transform_publisher" name="world_to_map" args="0 0 0 0 0 0 world map 30" />
+    <node pkg="rviz" name="rviz" type="rviz" args="-d /home/vaibhav/Desktop/transform.rviz" />
+
+    <!--<node pkg="robot_localization" type="navsat_transform_node" name="navsat_transform_node" output="screen">
+    <param name="publish_filtered_gps" value="true"/>
+    <remap from="/imu/data" to="/imu" />
+    <remap from="/gps/fix" to="/gps" />
+    <remap from="/odometry/filtered" to="/robot_control/odom" />
+    </node>-->
+</launch>

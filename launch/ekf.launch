@@ -1,0 +1,11 @@
+<launch>
+    <node pkg="robot_localization" type="ekf_localization_node" name="ekf_localization">
+        <rosparam command="load" file="$(find first_lap)/config/ekf_localisation.yaml"/>
+    </node>
+    <node pkg="robot_localization" type="navsat_transform_node" name="navsat_transform_node" output="screen">
+    <param name="publish_filtered_gps" value="true"/>
+    <remap from="/imu/data" to="/imu" />
+    <remap from="/gps/fix" to="/gps" />
+    <remap from="/odometry/filtered" to="/odometry/filtered" />
+    </node>
+</launch>
